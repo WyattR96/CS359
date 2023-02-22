@@ -5,13 +5,14 @@ Created Site table and data
 Created DigitalDisplay table and data
 Created Client table and data
 
-TODO:
+Ghaith Ishaq:
 Create TechnicalSupport table and data
 Create Administrator table and data
 Create Salesman table and data
 Create AirtimePackage table and data
 Create AdmWorkHours table and data
 
+TODO:
 Create Broadcasts table and data
 Create Administers table and data
 Create Specializes table and data
