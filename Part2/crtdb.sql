@@ -28,3 +28,37 @@ CREATE TABLE Client(
     phone varchar(16),
     address varchar(100)
 );
+CREATE TABLE TechnicalSupport(
+    empId  INT,
+    name   VARCHAR (40),
+    gender CHAR (1),
+    PRIMARY KEY (empId)
+);
+CREATE TABLE Administrator(
+    empId  INT,
+    name   VARCHAR (40),
+    gender CHAR (1),
+    PRIMARY KEY (empId)
+);
+CREATE TABLE Salesman(
+    empId  INT,
+    name   VARCHAR (40),
+    gender CHAR (1),
+    PRIMARY KEY (empId)
+);
+CREATE TABLE AirtimePackage(
+    packageId INT,
+    class     VARCHAR (16),
+    startDate DATE,
+    lastDate  DATE,
+    frequency INT,
+    videoCode INT,
+    PRIMARY KEY (packageId)
+);
+CREATE TABLE AdmWorkHours(
+    empId     INT,
+    day       DATE,
+    hours     NUMERIC (4, 2),
+    PRIMARY KEY (empId, day),
+    foreign key (empId) references Administrator (empId)
+);
