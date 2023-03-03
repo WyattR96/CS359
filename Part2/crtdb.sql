@@ -65,7 +65,7 @@ CREATE TABLE AdmWorkHours(
 CREATE TABLE Broadcasts(
 	videoCode INT,
 	siteCode INT,
-	FOREIGN KEY (empId) references Video (videoCode),
+	FOREIGN KEY (videoCode) references Video (videoCode),
 	FOREIGN KEY (siteCode) references Site (siteCode)
 );
 CREATE TABLE Administers(
