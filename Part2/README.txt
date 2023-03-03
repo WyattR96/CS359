@@ -12,11 +12,12 @@ Create Salesman table and data
 Create AirtimePackage table and data
 Create AdmWorkHours table and data
 
-TODO:
-Create Broadcasts table and data
-Create Administers table and data
-Create Specializes table and data
-Create Purchases table and data
-Create Locates table and data
+Caleb Larios:
+Created Broadcasts table and data
+Created Administers table and data
+Created Specializes table and data
+Created Purchases table and data
+Created Locates table and data
 
+TODO:
 Create Schemas.pdf
