@@ -4,6 +4,7 @@ Created Model table and data
 Created Site table and data
 Created DigitalDisplay table and data
 Created Client table and data
+Created Schemas.pdf
 
 Ghaith Ishaq:
 Create TechnicalSupport table and data
@@ -18,6 +19,3 @@ Created Administers table and data
 Created Specializes table and data
 Created Purchases table and data
 Created Locates table and data
-
-TODO:
-Create Schemas.pdf
