@@ -82,7 +82,7 @@ INSERT INTO Administers(empId,siteCode) VALUES
 (4,4),
 (5,5);
 
-INSERT INTO Specializes(empId,modelNo ) VALUES
+INSERT INTO Specializes(empId,modelNo) VALUES
 (1,1),
 (2,2),
 (3,3),
