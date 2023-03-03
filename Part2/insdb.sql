@@ -68,7 +68,7 @@ INSERT INTO AdmWorkHours(empId,day,hours) VALUES
 (4,"2020-06-15",08.34),
 (5,"2020-06-15",07.94);
 
-INSERT INTO Broadcast(videoCode,siteCode) VALUES
+INSERT INTO Broadcasts(videoCode,siteCode) VALUES
 (1,1),
 (2,2),
 (3,3),
