@@ -62,3 +62,35 @@ CREATE TABLE AdmWorkHours(
     PRIMARY KEY (empId, day),
     foreign key (empId) references Administrator (empId)
 );
+CREATE TABLE Broadcasts(
+	videoCode INT,
+	siteCode INT,
+	FOREIGN KEY (empId) references Video (videoCode),
+	FOREIGN KEY (siteCode) references Site (siteCode)
+);
+CREATE TABLE Administers(
+	empId INT,
+	siteCode INT,
+	FOREIGN KEY (empId) references Administrator (empId),
+	FOREIGN KEY (siteCode) references Site (siteCode)
+);
+CREATE TABLE Specializes(
+	empId INT,
+	modelNo CHAR(10),
+	FOREIGN KEY (empId) references TechnicalSupport (empId),
+	FOREIGN KEY (modelNo) references Model (modelNo)
+);
+CREATE TABLE Purchases(
+	clientId INT,
+	empId INT,
+	packageId INT,
+	commisionRate numeric (4,2),
+	FOREIGN KEY (empId) references Salesman (empId),
+	FOREIGN KEY (packageId) references AirtimePackage (packageId)
+);
+CREATE TABLE Locates(
+	serialNo CHAR (10),
+	siteCode INT,
+	FOREIGN KEY (serialNo) references DigitalDisplay (serialNo),
+	FOREIGN KEY (siteCode) references Site (siteCode)
+);
