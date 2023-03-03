@@ -67,3 +67,38 @@ INSERT INTO AdmWorkHours(empId,day,hours) VALUES
 (3,"2020-06-15",05.75),
 (4,"2020-06-15",08.34),
 (5,"2020-06-15",07.94);
+
+INSERT INTO Broadcast(videoCode,siteCode) VALUES
+(1,1),
+(2,2),
+(3,3),
+(4,4),
+(5,5);
+
+INSERT INTO Administers(empId,siteCode) VALUES
+(1,1),
+(2,2),
+(3,3),
+(4,4),
+(5,5);
+
+INSERT INTO Specializes(empId,modelNo ) VALUES
+(1,1),
+(2,2),
+(3,3),
+(4,4),
+(5,5);
+
+INSERT INTO Purchases(clientId,empId,packageId,commisionRate) VALUES
+(1,1,1,12.55),
+(2,2,2,10.33),
+(3,3,3,19.99),
+(4,4,4,15.01),
+(5,5,5,14.44);
+
+INSERT INTO Locates(serialNo,sitecode) VALUES
+(1,1),
+(2,2),
+(3,3),
+(4,4),
+(5,5);
