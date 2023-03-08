@@ -66,19 +66,22 @@ CREATE TABLE Broadcasts(
 	videoCode INT,
 	siteCode INT,
 	FOREIGN KEY (videoCode) references Video (videoCode),
-	FOREIGN KEY (siteCode) references Site (siteCode)
+	FOREIGN KEY (siteCode) references Site (siteCode),
+	PRIMARY KEY (videoCode,siteCode)
 );
 CREATE TABLE Administers(
 	empId INT,
 	siteCode INT,
 	FOREIGN KEY (empId) references Administrator (empId),
-	FOREIGN KEY (siteCode) references Site (siteCode)
+	FOREIGN KEY (siteCode) references Site (siteCode),
+	PRIMARY KEY (empId,siteCode)
 );
 CREATE TABLE Specializes(
 	empId INT,
 	modelNo CHAR(10),
 	FOREIGN KEY (empId) references TechnicalSupport (empId),
-	FOREIGN KEY (modelNo) references Model (modelNo)
+	FOREIGN KEY (modelNo) references Model (modelNo),
+	PRIMARY KEY (empId,modelNo)
 );
 CREATE TABLE Purchases(
 	clientId INT,
@@ -86,11 +89,13 @@ CREATE TABLE Purchases(
 	packageId INT,
 	commisionRate numeric (4,2),
 	FOREIGN KEY (empId) references Salesman (empId),
-	FOREIGN KEY (packageId) references AirtimePackage (packageId)
+	FOREIGN KEY (packageId) references AirtimePackage (packageId),
+	PRIMARY KEY(clientId,empId,packageId)
 );
 CREATE TABLE Locates(
 	serialNo CHAR (10),
 	siteCode INT,
 	FOREIGN KEY (serialNo) references DigitalDisplay (serialNo),
-	FOREIGN KEY (siteCode) references Site (siteCode)
+	FOREIGN KEY (siteCode) references Site (siteCode),
+	PRIMARY KEY (serialNo,siteCode)
 );
