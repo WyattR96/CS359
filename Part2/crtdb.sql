@@ -11,15 +11,15 @@ CREATE TABLE Model(
 
 CREATE TABLE Site(
     siteCode integer PRIMARY KEY,
-    type varchar(16),
+    type varchar(16) CHECK (type IN ("Bar","Restaurant")),
     address varchar(100),
     phone varchar(16)
 );
 
 CREATE TABLE DigitalDisplay (
     serialNo        CHAR (10) PRIMARY KEY,
-    schedulerSystem CHAR (10),
-    modelNo         CHAR (10) REFERENCES Model (modelNo) 
+    schedulerSystem CHAR (10) CHECK (schedulerSystem IN ("Random","Smart","Virtue")),
+    modelNo         CHAR (10) REFERENCES Model (modelNo)
 );
 
 CREATE TABLE Client(
@@ -48,7 +48,7 @@ CREATE TABLE Salesman(
 );
 CREATE TABLE AirtimePackage(
     packageId INT,
-    class     VARCHAR (16),
+    class     VARCHAR (16) CHECK (class IN ("economy","whole day","golden hours")),
     startDate DATE,
     lastDate  DATE,
     frequency INT,

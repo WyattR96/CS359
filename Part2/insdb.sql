@@ -16,8 +16,8 @@ INSERT INTO Site(siteCode,type,address,phone) VALUES
 (1,"Restaurant","5505 28th st","800-555-5555"),
 (2,"Bar","3602 Slide rd. B11","800-555-5555"),
 (3,"Bar","6405 Slide rd.","800-555-5555"),
-(4,"Restaraunt", "4001 4th st","800-555-5555"),
-(5,"Restaraunt","1234 Ave Q","800-555-5555");
+(4,"Restaurant", "4001 4th st","800-555-5555"),
+(5,"Restaurant","1234 Ave Q","800-555-5555");
 
 INSERT INTO DigitalDisplay(serialNo,schedulerSystem,modelNo) VALUES
 (1,"Random",1),
