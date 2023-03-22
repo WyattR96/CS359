@@ -24,9 +24,10 @@ def main():
     else:
         print("Function number out of range, must be a number between 1 and 8")
         
+        
 #Gives the information of a site on a given street
 def street(param):
-    con = sqlite3.connect("ABC.sqlite")
+    con = createConnection("ABC.sqlite")
     cursor=con.cursor()
     
     cursor.execute(
@@ -42,11 +43,13 @@ def street(param):
     for row in rows:
         print(row)
     
+    closeConnection(con)
+    
 #Gives the information of a display with a given scheduler system
 def scheduler(param):
-    con = sqlite3.connect("ABC.sqlite")
-    
+    con = createConnection("ABC.sqlite")
     cursor=con.cursor()
+    
     cursor.execute("""
                    INSERT SQL HERE
                    """)
@@ -54,12 +57,14 @@ def scheduler(param):
     rows=cursor.fetchall()
     for row in rows:
         print(row)
+        
+    closeConnection(con)
     
 #Gives the names of all salesmen and the number of salesmen with that name
 def salesmen():
-    con = sqlite3.connect("ABC.sqlite")
-    
+    con = createConnection("ABC.sqlite")
     cursor=con.cursor()
+    
     cursor.execute("""
                    INSERT SQL HERE
                    """)
@@ -67,12 +72,14 @@ def salesmen():
     rows=cursor.fetchall()
     for row in rows:
         print(row)
+    
+    closeConnection(con)
 
 #Finds a client with a given phone number
 def client(param):
-    con = sqlite3.connect("ABC.sqlite")
-    
+    con = createConnection("ABC.sqlite")
     cursor=con.cursor()
+    
     cursor.execute("""
                    INSERT SQL HERE
                    """)
@@ -80,12 +87,14 @@ def client(param):
     rows=cursor.fetchall()
     for row in rows:
         print(row)
+        
+    closeConnection(con)
     
 #Finds the total working hours of each administrator 
 def admwork():
-    con = sqlite3.connect("ABC.sqlite")
-    
+    con = createConnection("ABC.sqlite")
     cursor=con.cursor()
+    
     cursor.execute("""
                    INSERT SQL HERE
                    """)
@@ -93,12 +102,14 @@ def admwork():
     rows=cursor.fetchall()
     for row in rows:
         print(row)
+        
+    closeConnection(con)
     
 #Finds technical support that specialize in a specified model
 def tech(param):
-    con = sqlite3.connect("ABC.sqlite")
-    
+    con = createConnection("ABC.sqlite")
     cursor=con.cursor()
+    
     cursor.execute(
                    """
                    INSERT SQL HERE
@@ -108,12 +119,14 @@ def tech(param):
     rows=cursor.fetchall()
     for row in rows:
         print(row)
+        
+    closeConnection(con)
 
 #Orders salesment in decending order of their average commission rates
 def commission():
-    con = sqlite3.connect("ABC.sqlite")
-    
+    con = createConnection("ABC.sqlite")
     cursor=con.cursor()
+    
     cursor.execute("""
                    INSERT SQL HERE
                    """)
@@ -121,12 +134,14 @@ def commission():
     rows=cursor.fetchall()
     for row in rows:
         print(row)
+        
+    closeConnection(con)
     
 #Calculates the number of administrators, salesmen, and technical supports
 def calc():
-    con = sqlite3.connect("ABC.sqlite")
-    
+    con = createConnection("ABC.sqlite")
     cursor=con.cursor()
+    
     cursor.execute("""
                    INSERT SQL HERE
                    """)
@@ -134,12 +149,37 @@ def calc():
     rows=cursor.fetchall()
     for row in rows:
         print(row)
+        
+    closeConnection(con)
+
 
 #Replaces underscores in the argument with spaces
 def textProcessing():
     return str(sys.argv[2]).replace("_"," ")
 
-#Calls the main function
-if __name__ == '__main__':
-    main() 
+#Creates a connection to the database
+def createConnection(file):
+    con=None
+    try:
+        con=sqlite3.connect(file)
+        print("Connection successful")
+        
+    except sqlite3.Error as e:
+        print(e)
+    
+    return con
+
+#Closes the database connection
+def closeConnection(con):
+    con.close()
+
+#Checks if the user has input arguments for the program
+n=len(sys.argv)
+if n==1:
+    print("Program requires at least 1 argument.") 
+else:
+    #Calls the main function
+    if __name__ == '__main__':
+        main() 
+
    
