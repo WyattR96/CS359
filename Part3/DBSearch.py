@@ -60,13 +60,8 @@ def scheduler(param):
     
     rows=cursor.fetchall()
     for row in rows:
-        print(row[0], row[1])
-        if row[1] > 1:
-            query2 = "SELECT * FROM Salesman WHERE name = ?"
-            c.execute(query2, (row[0],))
-            more_rows = c.fetchall()
-            for more_row in more_rows:
-                print(more_row)
+        print(row)
+        
     closeConnection(con)
     
 #Gives the names of all salesmen and the number of salesmen with that name
@@ -83,12 +78,32 @@ def salesmen():
     
     rows=cursor.fetchall()
     for row in rows:
-        print(row)
-    
+        print(row[0], row[1])
+        if row[1] > 1:
+            query2 = "SELECT * FROM Salesman WHERE name = ?"
+            c.execute(query2, (row[0],))
+            more_rows = c.fetchall()
+            for more_row in more_rows:
+                print(more_row)
     closeConnection(con)
 
 #Finds a client with a given phone number
 def client(param):
+    con = createConnection("ABC.sqlite")
+    cursor=con.cursor()
+    
+    cursor.execute("""
+                    SELECT * FROM Client WHERE phone = ?
+                   """)
+    
+    rows=cursor.fetchall()
+    for row in rows:
+        print(row)
+        
+    closeConnection(con)
+    
+#Finds the total working hours of each administrator 
+def admwork():
     con = createConnection("ABC.sqlite")
     cursor=con.cursor()
     
@@ -104,21 +119,6 @@ def client(param):
     rows=cursor.fetchall()
     for row in rows:
         print(row[0], row[1], row[2])
-        
-    closeConnection(con)
-    
-#Finds the total working hours of each administrator 
-def admwork():
-    con = createConnection("ABC.sqlite")
-    cursor=con.cursor()
-    
-    cursor.execute("""
-                   INSERT SQL HERE
-                   """)
-    
-    rows=cursor.fetchall()
-    for row in rows:
-        print(row)
         
     closeConnection(con)
     
