@@ -51,13 +51,22 @@ def scheduler(param):
     cursor=con.cursor()
     
     cursor.execute("""
-                   INSERT SQL HERE
+                    SELECT DigitalDisplay.serialNo, DigitalDisplay.modelNo, TechnicalSupport.name 
+                    FROM DigitalDisplay 
+                    INNER JOIN Specializes ON DigitalDisplay.modelNo = Specializes.modelNo 
+                    INNER JOIN TechnicalSupport ON Specializes.empId = TechnicalSupport.empId 
+                    WHERE DigitalDisplay.schedulerSystem = ?
                    """)
     
     rows=cursor.fetchall()
     for row in rows:
-        print(row)
-        
+        print(row[0], row[1])
+        if row[1] > 1:
+            query2 = "SELECT * FROM Salesman WHERE name = ?"
+            c.execute(query2, (row[0],))
+            more_rows = c.fetchall()
+            for more_row in more_rows:
+                print(more_row)
     closeConnection(con)
     
 #Gives the names of all salesmen and the number of salesmen with that name
@@ -66,7 +75,10 @@ def salesmen():
     cursor=con.cursor()
     
     cursor.execute("""
-                   INSERT SQL HERE
+                    SELECT name, COUNT(*) as cnt 
+                    FROM Salesman 
+                    GROUP BY name 
+                    ORDER BY name ASC
                    """)
     
     rows=cursor.fetchall()
@@ -81,12 +93,17 @@ def client(param):
     cursor=con.cursor()
     
     cursor.execute("""
-                   INSERT SQL HERE
+                    SELECT Administers.empId, Administrator.name, SUM(AdmWorkHours.hours) as total_hours 
+                    FROM Administers 
+                    INNER JOIN AdmWorkHours ON Administers.empId = AdmWorkHours.empId 
+                    INNER JOIN Administrator ON Administers.empId = Administrator.empId 
+                    GROUP BY Administers.empId 
+                    ORDER BY total_hours ASC
                    """)
     
     rows=cursor.fetchall()
     for row in rows:
-        print(row)
+        print(row[0], row[1], row[2])
         
     closeConnection(con)
     
