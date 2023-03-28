@@ -12,7 +12,7 @@ def main():
     elif func==3:
         salesmen()
     elif func==4:
-        client(textProcessing())
+        client(sys.argv[2])
     elif func==5:
         admwork()
     elif func==6:
@@ -56,7 +56,7 @@ def scheduler(param):
                     INNER JOIN Specializes ON DigitalDisplay.modelNo = Specializes.modelNo 
                     INNER JOIN TechnicalSupport ON Specializes.empId = TechnicalSupport.empId 
                     WHERE DigitalDisplay.schedulerSystem = ?
-                   """)
+                   """,(param,))
     
     rows=cursor.fetchall()
     for row in rows:
@@ -81,8 +81,8 @@ def salesmen():
         print(row[0], row[1])
         if row[1] > 1:
             query2 = "SELECT * FROM Salesman WHERE name = ?"
-            c.execute(query2, (row[0],))
-            more_rows = c.fetchall()
+            cursor.execute(query2, (row[0],))
+            more_rows = cursor.fetchall()
             for more_row in more_rows:
                 print(more_row)
     closeConnection(con)
@@ -94,7 +94,7 @@ def client(param):
     
     cursor.execute("""
                     SELECT * FROM Client WHERE phone = ?
-                   """)
+                   """,(param,))
     
     rows=cursor.fetchall()
     for row in rows:
