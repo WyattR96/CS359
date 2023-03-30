@@ -5,6 +5,8 @@ Query 1
 Ghaith Ishaq:
 Queries 2-5
 
+Caleb Larios:
+Queries 6-8
+
 TODO:
-Write SQL for queries 6 through 8
 Create Execution.pdf
