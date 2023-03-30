@@ -129,13 +129,16 @@ def tech(param):
     
     cursor.execute(
                    """
-                   INSERT SQL HERE
-                   """
+                   SELECT TechnicalSupport.name
+                   FROM TechnicalSupport
+                   INNER JOIN Specializes ON TechnicalSupport.empID = Specializes.empID
+                   WHERE Specializes.modelNo = ?
+                   """, (param,)
                    )
     
     rows=cursor.fetchall()
     for row in rows:
-        print(row)
+        print(row[0])
         
     closeConnection(con)
 
@@ -145,12 +148,16 @@ def commission():
     cursor=con.cursor()
     
     cursor.execute("""
-                   INSERT SQL HERE
+                   SELECT Salesman.name, AVG(Purchases.commisionRate) as average_rate
+                   FROM Salesman
+                   INNER JOIN Purchases ON Salesman.empID = Purchases.empID
+                   GROUP BY Salesman.name
+                   ORDER BY average_rate desc 
                    """)
     
     rows=cursor.fetchall()
     for row in rows:
-        print(row)
+        print(row[0], row[1])
         
     closeConnection(con)
     
@@ -160,12 +167,19 @@ def calc():
     cursor=con.cursor()
     
     cursor.execute("""
-                   INSERT SQL HERE
+                   SELECT 'Administrator' as Admin_name, COUNT(Administrator.name)
+                   FROM Administrator
+                   UNION ALL 
+                   SELECT 'Salesman' as Salesman_name, COUNT(Salesman.empID)
+                   FROM Salesman
+                   UNION ALL 
+                   Select 'Technicians' as technicalSupport_name, COUNT(TechnicalSupport.empID)
+                   from TechnicalSupport
                    """)
     
     rows=cursor.fetchall()
     for row in rows:
-        print(row)
+        print(row[0], row[1])
         
     closeConnection(con)
 
