@@ -6,6 +6,9 @@ CREATE TABLE Video(
 CREATE TABLE Model(
     modelNo char(10) PRIMARY KEY,
     width numeric(6,2),
+    height numeric(6,2),
+    weight numeric(6,2),
+    depth numeric(6,2),
     screenSize numeric(6,2)
 );
 
@@ -88,6 +91,7 @@ CREATE TABLE Purchases(
 	empId INT,
 	packageId INT,
 	commisionRate numeric (4,2),
+    FOREIGN KEY (clientId) references Client (clientId),
 	FOREIGN KEY (empId) references Salesman (empId),
 	FOREIGN KEY (packageId) references AirtimePackage (packageId),
 	PRIMARY KEY(clientId,empId,packageId)
