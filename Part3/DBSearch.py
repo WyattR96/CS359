@@ -12,7 +12,7 @@ def main():
     elif func==3:
         salesmen()
     elif func==4:
-        client(sys.argv[2])
+        client(textProcessing())
     elif func==5:
         admwork()
     elif func==6:
@@ -25,7 +25,7 @@ def main():
         print("Function number out of range, must be a number between 1 and 8")
         
         
-#Gives the information of a site on a given street
+#Gives the information of a site on a given street 1
 def street(param):
     con = createConnection("ABC.sqlite")
     cursor=con.cursor()
@@ -40,12 +40,14 @@ def street(param):
     
     
     rows=cursor.fetchall()
+    
+    print("Site:")
     for row in rows:
         print(row)
     
     closeConnection(con)
-    
-#Gives the information of a display with a given scheduler system
+
+#Gives the information of a display with a given scheduler system 2
 def scheduler(param):
     con = createConnection("ABC.sqlite")
     cursor=con.cursor()
@@ -59,12 +61,13 @@ def scheduler(param):
                    """,(param,))
     
     rows=cursor.fetchall()
+    print("Displays:")
     for row in rows:
-        print(row)
+        print(rows)
         
     closeConnection(con)
     
-#Gives the names of all salesmen and the number of salesmen with that name
+#Gives the names of all salesmen and the number of salesmen with that name 3
 def salesmen():
     con = createConnection("ABC.sqlite")
     cursor=con.cursor()
@@ -77,6 +80,8 @@ def salesmen():
                    """)
     
     rows=cursor.fetchall()
+    print("Name\t\tCnt")
+    print("-"*25)
     for row in rows:
         print(row[0], row[1])
         if row[1] > 1:
@@ -86,23 +91,24 @@ def salesmen():
             for more_row in more_rows:
                 print(more_row)
     closeConnection(con)
-
-#Finds a client with a given phone number
+    
+#Finds a client with a given phone number 4
 def client(param):
     con = createConnection("ABC.sqlite")
     cursor=con.cursor()
     
     cursor.execute("""
                     SELECT * FROM Client WHERE phone = ?
-                   """,(param,))
+                   """, (param,))
     
     rows=cursor.fetchall()
+    print("Client:")
     for row in rows:
         print(row)
         
     closeConnection(con)
     
-#Finds the total working hours of each administrator 
+#Finds the total working hours of each administrator 5
 def admwork():
     con = createConnection("ABC.sqlite")
     cursor=con.cursor()
@@ -117,12 +123,13 @@ def admwork():
                    """)
     
     rows=cursor.fetchall()
+    print("Total working hours of each administrator:")
     for row in rows:
         print(row[0], row[1], row[2])
         
     closeConnection(con)
-    
-#Finds technical support that specialize in a specified model
+
+#Finds technical support that specialize in a specified model 6
 def tech(param):
     con = createConnection("ABC.sqlite")
     cursor=con.cursor()
@@ -137,12 +144,13 @@ def tech(param):
                    )
     
     rows=cursor.fetchall()
+    print("Technical Supports that specialize in the given model:")
     for row in rows:
         print(row[0])
         
     closeConnection(con)
 
-#Orders salesment in decending order of their average commission rates
+#Orders salesment in decending order of their average commission rates 7
 def commission():
     con = createConnection("ABC.sqlite")
     cursor=con.cursor()
@@ -156,12 +164,13 @@ def commission():
                    """)
     
     rows=cursor.fetchall()
+    print("Average commision rates:")
     for row in rows:
         print(row[0], row[1])
         
     closeConnection(con)
     
-#Calculates the number of administrators, salesmen, and technical supports
+#Calculates the number of administrators, salesmen, and technical supports 8
 def calc():
     con = createConnection("ABC.sqlite")
     cursor=con.cursor()
@@ -178,9 +187,12 @@ def calc():
                    """)
     
     rows=cursor.fetchall()
+    amnt=0
     for row in rows:
         print(row[0], row[1])
-        
+        amnt+=row[1]
+    print("Total Number of administrators, salesmen, and technical supports:")
+    print(amnt)
     closeConnection(con)
 
 
