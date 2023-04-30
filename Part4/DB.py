@@ -82,10 +82,47 @@ def listDisplays(con):
         print("\n")
 
 def searchDisplays(con):
-    print("\nSearch\n")
+    schedulerSystem = input("Enter a scheduler system (Random/Smart/Virtue): ")
+    cursor = con.cursor()
+
+    cursor.execute(
+        """
+        SELECT *
+        FROM DigitalDisplay
+        WHERE schedulerSystem = ?
+        """,
+        (schedulerSystem,)
+    )
+
+    rows = cursor.fetchall()
+
+    if len(rows) == 0:
+        print("No displays found with this scheduler system.")
+    else:
+        print("Serial Scheduler Model")
+        for row in rows:
+            print(row)
+        print("\n")
 
 def insertDisplay(con):
-    print("\ninsert\n")
+    serialNo = input("Enter a serial number: ")
+    schedulerSystem = input("Enter a scheduler system (Random/Smart/Virtue): ")
+    modelNo = input("Enter a model number: ")
+    cursor = con.cursor()
+
+    try:
+        cursor.execute(
+            """
+            INSERT INTO DigitalDisplay (serialNo, schedulerSystem, modelNo)
+            VALUES (?, ?, ?)
+            """,
+            (serialNo, schedulerSystem, modelNo)
+        )
+        con.commit()
+        print("Display successfully inserted.")
+    except sqlite3.IntegrityError:
+        print("Error: Serial number already exists.")
+    print("\n")
 
 def deleteDisplay(con):
     print("\nDelete\n")
