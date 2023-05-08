@@ -148,7 +148,9 @@ def deleteDisplay(con):
         WHERE modelNo = ?
         """, (delete_selection,)
     )
-
+    
+    con.commit()
+    
     print("New List of Digital Displays")
 
     cursor.execute(
@@ -247,7 +249,9 @@ def updateDisplay(con):
               FROM DigitalDisplay
             """
         )
-
+        
+        con.commit()
+        
         rows = cursor.fetchall()
 
         print("Serial Scheduler Model")
@@ -273,7 +277,9 @@ def updateDisplay(con):
               FROM DigitalDisplay
             """
         )
-
+        
+        con.commit()
+        
         rows = cursor.fetchall()
 
         print("Serial Scheduler Model")
