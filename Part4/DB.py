@@ -142,15 +142,20 @@ def deleteDisplay(con):
     print("\n")
     delete_selection = input("Please select by model Number which digital display you would like to Delete\n")
 
-    cursor.execute(
-        """
-        DELETE FROM DigitalDisplay
-        WHERE modelNo = ?
-        """, (delete_selection,)
-    )
-    
-    con.commit()
-    
+    x = 1
+    for row in rows:
+        if row[2] != delete_selection:
+            x = x + 1
+            if x > len(rows):
+                print("invalid selection")
+        else:
+            cursor.execute(
+                """
+                DELETE FROM DigitalDisplay
+                 WHERE modelNo = ?
+                """, (delete_selection,)
+            )
+
     print("New List of Digital Displays")
 
     cursor.execute(
@@ -187,108 +192,109 @@ def updateDisplay(con):
 
     selected_display = input("Please select which display you would like to Update by modelNo\n")
 
-    cursor.execute(
-        """
-        SELECT serialNo, schedulerSystem, modelNo
-        FROM DigitalDisplay
-        WHERE modelNo = ?
-        """, (selected_display,)
-    )
-
-    rows = cursor.fetchall()
-    print("Serial Scheduler Model")
+    x = 1
     for row in rows:
-        print(row)
-    print("\n")
+        if row[2] != selected_display:
+            x = x + 1
+            if x > len(rows):
+                print("invalid selection")
+        else:
+            cursor.execute(
+                """
+                SELECT serialNo, schedulerSystem, modelNo
+                FROM DigitalDisplay
+                WHERE modelNo = ?
+                """, (selected_display,)
+            )
+            rows = cursor.fetchall()
+            print("Serial Scheduler Model")
+            for row in rows:
+                print(row)
+            print("\n")
 
-    print("Select what you would like to update enter 1, 2, or 3\n")
-    change_selection = int(input("1 for serial Number, 2 for Scheduler, and 3 for model number\n"))
+            print("Select what you would like to update enter 1, 2, or 3\n")
+            change_selection = int(input("1 for serial Number, 2 for Scheduler, and 3 for model number\n"))
 
+            if change_selection == 1:
+                new_info = input("What would you like to change serialNo to?\n")
 
-    if change_selection == 1:
-        new_info = input("What would you like to change serialNo to?\n")
+                cursor.execute(
+                    """
+                    UPDATE DigitalDisplay
+                    SET serialNo = ?
+                    WHERE modelNo = ?
+                    """, (new_info, selected_display,)
+                )
+                print("New Updated Table\n")
 
-        cursor.execute(
-            """
-            UPDATE DigitalDisplay
-            SET serialNo = ?
-            WHERE modelNo = ?
-            """, (new_info, selected_display, )
-        )
-        print("New Updated Table\n")
+                cursor.execute(
+                    """
+                      SELECT *
+                      FROM DigitalDisplay
+                    """
+                )
 
-        cursor.execute(
-            """
-              SELECT *
-              FROM DigitalDisplay
-            """
-        )
+                rows = cursor.fetchall()
 
-        rows = cursor.fetchall()
+                print("Serial Scheduler Model")
+                for row in rows:
+                    print(row)
+                print("\n")
 
-        print("Serial Scheduler Model")
-        for row in rows:
-            print(row)
-        print("\n")
+            elif change_selection == 2:
+                new_info = input("What would you like to change schedulerSystem to (Virtual, Random, or Smart)?\n")
 
-    elif change_selection == 2:
-        new_info = input("What would you like to change schedulerSystem to (Virtual, Random, or Smart)?\n")
+                cursor.execute(
+                    """
+                    UPDATE DigitalDisplay
+                    SET schedulerSystem = ?
+                    WHERE modelNo = ?
+                    """, (new_info, selected_display,)
+                )
+                print("New Updated Table\n")
 
-        cursor.execute(
-            """
-            UPDATE DigitalDisplay
-            SET schedulerSystem = ?
-            WHERE modelNo = ?
-            """, (new_info, selected_display,)
-        )
-        print("New Updated Table\n")
+                cursor.execute(
+                    """
+                      SELECT *
+                      FROM DigitalDisplay
+                    """
+                )
 
-        cursor.execute(
-            """
-              SELECT *
-              FROM DigitalDisplay
-            """
-        )
-        
-        con.commit()
-        
-        rows = cursor.fetchall()
+                rows = cursor.fetchall()
 
-        print("Serial Scheduler Model")
-        for row in rows:
-            print(row)
-        print("\n")
+                print("Serial Scheduler Model")
+                for row in rows:
+                    print(row)
+                print("\n")
 
-    elif change_selection == 3:
-        new_info = input("What would you like to change modelNo to?\n")
+            elif change_selection == 3:
+                new_info = input("What would you like to change modelNo to?\n")
 
-        cursor.execute(
-            """
-            UPDATE DigitalDisplay
-            SET modelNo = ?
-            WHERE modelNo = ?
-            """, (new_info, selected_display,)
-        )
-        print("New Updated Table\n")
+                cursor.execute(
+                    """
+                    UPDATE DigitalDisplay
+                    SET modelNo = ?
+                    WHERE modelNo = ?
+                    """, (new_info, selected_display,)
+                )
+                print("New Updated Table\n")
 
-        cursor.execute(
-            """
-              SELECT *
-              FROM DigitalDisplay
-            """
-        )
-        
-        con.commit()
-        
-        rows = cursor.fetchall()
+                cursor.execute(
+                    """
+                      SELECT *
+                      FROM DigitalDisplay
+                    """
+                )
 
-        print("Serial Scheduler Model")
-        for row in rows:
-            print(row)
-        print("\n")
+                rows = cursor.fetchall()
 
-    else:
-        print("invalid input\n")
+                print("Serial Scheduler Model")
+                for row in rows:
+                    print(row)
+                print("\n")
+
+            else:
+                print("invalid input\n")
         
     
 def logout(con):
